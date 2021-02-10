@@ -7,6 +7,8 @@ import requests
 class Params(object):
     def __init__(self):
         self.ll = '37.530887,55.70311'
+        self.lx = "37.530887"
+        self.ly = "55.703118"
         self.z = 12
         self.l = "map"
 
@@ -19,6 +21,30 @@ class Params(object):
         if self.z > 1:
             self.z -= 1
             print(self.z)
+
+    def up3(self):
+        self.lx = float(self.lx)
+        self.lx += 0.2
+        self.lx = str(self.lx)
+        self.ll = self.lx + "," + self.ly
+
+    def down3(self):
+        self.lx = float(self.lx)
+        self.lx -= 0.2
+        self.lx = str(self.lx)
+        self.ll = self.lx + "," + self.ly
+
+    def right(self):
+        self.ly = float(self.lx)
+        self.ly += 0.2
+        self.ly = str(self.ly)
+        self.ll = self.lx + "," + self.ly
+
+    def left(self):
+        self.ly = float(self.lx)
+        self.ly -= 0.2
+        self.ly = str(self.ly)
+        self.ll = self.lx + "," + self.ly
 
 
 def load_map(p):
@@ -52,7 +78,14 @@ while pygame.event.wait().type != pygame.QUIT:
         params.up()
     if key[pygame.K_PAGEDOWN]:
         params.down()
-
+    if key[pygame.K_UP]:
+        params.up3()
+    if key[pygame.K_DOWN]:
+        params.down3()
+    if key[pygame.K_LEFT]:
+        params.left()
+    if key[pygame.K_RIGHT]:
+        params.right()
 
 pygame.quit()
 
